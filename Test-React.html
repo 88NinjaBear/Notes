@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../react全家桶资料/03_依赖包/新版本/react.development.js"></script>
+    <script src="../react全家桶资料/03_依赖包/新版本/react-dom.development.js"></script>
+    <script src="../react全家桶资料/03_依赖包/新版本/babel.min.js"></script>
+    <div id="root"></div>
+    <script type="text/babel">
+        //const ele = React.createElement('h1', { className: 'box' }, 'hello react!');
+        const arr = ['apple', 'pear', 'berry'];
+        // const newArr = [];
+        // arr.forEach((ele, index) => {
+        //     const temp = <p key={index}>{ele}</p>
+        //     newArr.push(temp);
+        // })
+
+        const newArr = arr.map((item, index) => {
+            return <p key={index}>{item}</p>
+        })
+        console.dir(newArr)
+
+        const obj = {
+            name: 'Joe',
+            age: 10
+        }
+        const obj2 = {
+            name: 'mike',
+            age: 15
+        }
+
+        // function Hello(props) {
+
+        //     console.log(props)
+        //     const arr = Object.keys(props).map((item, index) => {
+        //         console.log(props[item]);
+        //         return <p key={index}> {item} -- {props[item].age} </p>
+        //     })
+        //     return <div>{arr}</div>
+        // }
+
+        class Hello extends React.Component {
+            constructor(props) {
+                super();
+                this.state = { a: 1 }
+                this.m = 10;
+            }
+
+            change = () => {
+                console.log(this);
+                //this.m = this.m + 1;
+                //this.state.a += 1
+                this.setState({ a: this.state.a + 1 })
+            }
+
+            render() {
+                console.log(this.props)
+                return <div onClick={this.change}>Hello React!!!{this.state.a}</div>
+            }
+        }
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { a: 1 };
+                this.myRef = React.createRef();
+
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h2>{this.state.a}</h2>
+                        <input type="text" value={this.state.a} onChange={
+                            (e) => {
+                                console.log(e)
+                                this.setState({
+                                    a: e.target.value
+                                })
+                            }
+                        } />
+
+                        <div>
+                            <input type="text" ref="myInput" />
+                            <button onClick={
+                                () => {
+                                    console.log(this)
+                                    console.log(this.refs.myInput.value)
+                                }
+                            }>click me</button>
+                        </div>
+
+                        <div>
+                            <input type="text" ref={this.myRef} />
+                            <button onClick={
+                                () => {
+                                    console.log(this)
+                                    console.log(this.myRef.current.value)
+                                }
+                            }>click me</button>
+                        </div>
+
+                        <div>
+                            <input type="text" ref={(c) => { this.eleRef = c }} />
+                            <button onClick={
+                                () => {
+                                    console.log(this)
+                                    console.log(this.eleRef.value)
+                                }
+                            }>click me</button>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        class Parent extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    res: 10,
+                }
+                this.changeRes = this.changeRes.bind(this);
+            }
+
+            changeRes() {
+                console.log(this);
+                this.setState({ res: this.state.res + 1 })
+            }
+
+            render() {
+                return (
+                    <div>
+                        Parent Component
+                        <p>{this.state.res}</p>
+                        <hr />
+                        <Child cc={this.state.res} setRes={this.changeRes} />
+                    </div>
+                )
+            }
+        }
+
+        class Child extends React.Component {
+            constructor() {
+                super();
+            }
+
+            render() {
+                return (
+                    <div>
+                        Child Compoment
+                        <p>data from Parent Component {this.props.cc}</p>
+                        <button onClick={() => { this.props.setRes() }}>change parent's data</button>
+                    </div>
+                )
+            }
+        }
+
+        const ele = <div>
+            <Parent />
+            <hr />
+            <Hello joe={obj} mike={obj2} />
+        </div>;
+
+        ReactDOM.render(
+            ele,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+
+</html>

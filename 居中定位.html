@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>居中定位</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: aqua;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .box {
+            box-sizing: border-box;
+            width: 100px;
+            height: 50px;
+            background-color: yellow;
+            line-height: 48px;
+            font-size: 16px;
+            border: 1px solid red;
+        }
+
+        /* 方法一：基于定位 position */
+        /* body {
+            position: relative;
+        } */
+
+        /* .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -50px;
+        } */
+
+        /* .box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        } */
+
+        /* .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        } */
+
+        /* 方法二：基于display：flex */
+        /* body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+        /* 
+        方案三：基于diaplay：table-cell */
+        /* body{
+            display:table-cell;
+            vertical-align:middle;
+            text-align:center;
+            width:500px;
+            height:500px;
+        }
+
+        .box{
+            display: inline-block;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        Mount Everest
+    </div>
+    <script>
+        // 方法三：居于js
+        // let HTML = document.documentElement
+        // winW = HTML.clientWidth
+        // winH = HTML.clientHeight
+        // // let box = document.getElementById('box')
+        // boxW = box.offsetWidth;
+        // boxH = box.offsetHeight;
+        // console.log(box)
+        // console.log(boxW, boxH)
+        // box.style.position = 'absolute'
+        // box.style.left = (winW - boxW) / 2 + 'px';
+        // box.style.top = (winH - boxH) / 2 + 'px';
+    </script>
+</body>
+
+</html>

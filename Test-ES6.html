@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello ES6</h1>
+</body>
+<script>
+    var arr = [];
+    for (var i = 0; i < 2; i++) {
+        (function (j) {
+            arr[j] = function () {
+                console.log(j);
+            }
+        })(i)
+    }
+
+    for (var k = 0; k < 2; k++) {
+        arr[k]();
+    }
+
+    function getCar(make, model, price) {
+        return {
+            make,
+            model,
+            price,
+            [`madeBy${make}`]: true,
+            depreciate() { return this.price -= 1000 }
+        }
+    }
+    console.log(getCar('BMW', 'XS', 6000).depreciate())
+
+
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+        sayHello() {
+            console.log(`my name is ${this.name}`)
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, age) {
+            super(name);
+            this.age = age;
+        }
+        intro() {
+            console.log(`my age is ${this.age}`)
+        }
+    }
+    let per = new Person("Di");
+    let std = new Student("Di", 33);
+
+    const fn = () => {
+        console.log('fn', this);
+
+        const run = () => {
+            console.log(this);
+            console.log(this.a);
+        }
+
+        run()
+    }
+
+    var obj1 = {
+        a: 1,
+        fn: fn
+    };
+
+    var obj2 = {
+        a: 2,
+        fn: fn
+    }
+    fn()
+    obj1.fn();
+
+    let obj = {
+        name: 'a',
+        sayHello: () => {
+            console.log(this);
+            console.log(this.a)
+        }
+    }
+
+    obj.sayHello()
+
+    function strict() {
+        'use strict'
+        console.log(this)
+    }
+
+</script>
+
+</html>
